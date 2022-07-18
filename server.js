@@ -11,8 +11,8 @@ io.on("connection", (socket) => {
     const data = ""
     socket.join(documentId);
     socket.emit("load-document", data);
-    socket.on("send-changes", (delta) => {
-      socket.broadcast.to(documentId).emit("receive-changes", delta);
+    socket.on("send-changes", (value) => {
+      socket.broadcast.to(documentId).emit("receive-changes", value);
     });
   });
 });
