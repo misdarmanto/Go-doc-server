@@ -2,8 +2,17 @@ const PORT = process.env.PORT || 3001;
 const URI = false ? "https://go-docdoc.web.app" : "http://localhost:3000";
 const io = require("socket.io")(PORT, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origins: ["https://go-docdoc.web.app"],
+    // methods: ["GET", "POST"],
+    handlePreflightRequest: (req, res) => {
+      res.writeHead(200, {
+        "Access-Control-Allow-Origin": "https://example.com",
+        "Access-Control-Allow-Methods": "GET,POST",
+        "Access-Control-Allow-Headers": "my-custom-header",
+        "Access-Control-Allow-Credentials": true,
+      });
+      res.end();
+    },
   },
 });
 
